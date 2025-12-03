@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navy Header</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- 1. RESET & BASIC STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+        }
+
+        /* --- 2. HEADER CONTAINER --- */
+        header {
+            width: 100%;
+            height: 100px;
+            background-color: #0a192f; /* Navy Blue */
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%; /* Responsive horizontal padding */
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        /* --- 3. LOGO (LEFT) --- */
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* --- 4. NAVIGATION (CENTER) --- */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #a8b2d1; /* Light slate color */
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #64ffda; /* Cyan accent on hover */
+        }
+
+        /* --- 5. SOCIAL ICONS (RIGHT) --- */
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: #ffffff;
+            font-size: 20px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #64ffda;
+            transform: translateY(-3px);
+        }
+
+        /* --- 6. HAMBURGER MENU (HIDDEN ON DESKTOP) --- */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .bar {
+            width: 30px;
+            height: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 2px;
+        }
+
+        /* --- 7. RESPONSIVE MEDIA QUERIES --- */
+        @media screen and (max-width: 768px) {
+            
+            /* Hide Desktop Nav and Socials */
+            .nav-links, .social-icons {
+                display: none; 
+            }
+
+            /* Show Hamburger */
+            .hamburger {
+                display: flex;
+                z-index: 1001; /* Above the mobile menu */
+            }
+
+            /* Mobile Menu Styling */
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh; /* Full screen height */
+                background-color: #0a192f;
+                gap: 50px;
+                animation: slideDown 0.4s ease-out;
+            }
+
+            .nav-links.active a {
+                font-size: 24px;
+                color: #fff;
+            }
+
+            /* Optional: Add social icons to the bottom of mobile menu via JS or just CSS positioning, 
+               but strictly per prompt, we just open the "mobile menu with the same links". */
+
+            /* Hamburger Animation to 'X' */
+            .hamburger.toggle .bar:nth-child(1) {
+                transform: rotate(-45deg) translate(-7px, 6px);
+            }
+            .hamburger.toggle .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.toggle .bar:nth-child(3) {
+                transform: rotate(45deg) translate(-7px, -6px);
+            }
+        }
+
+        /* Animation for menu */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Left: Logo -->
+        <a href="#" class="logo">Brand.</a>
+
+        <!-- Center: Nav Links -->
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+
+        <!-- Right: Social Icons -->
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+
+        <!-- Mobile Hamburger Button -->
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </header>
+
+    <!-- Content Placeholder so you can see the header sticky/fixed behavior if needed -->
+    <div style="padding: 50px; text-align: center; color: #333;">
+        <h1>Welcome to the Website</h1>
+        <p>Resize the browser window to see the mobile responsiveness.</p>
+    </div>
+
+    <!-- --- 8. JAVASCRIPT --- -->
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            // Toggle the mobile menu visibility
+            navLinks.classList.toggle('active');
+            
+            // Toggle the hamburger to 'X' animation
+            hamburger.classList.toggle('toggle');
+        });
+    </script>
+
+</body>
+</html>
